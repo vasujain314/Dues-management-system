@@ -9,13 +9,35 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
 <body>
+
+  <br/><br/>
+<div class="container">
+  <div class="col-lg-3">
+    
+    <form name="contact-form" action="" method="post" id="contact-form">
+<div class="form-group">
+<label for="id">ENTER ID TO DELETE</label>
+
+<input type="text" class="form-control" name="id" placeholder="id" required>
+<br/>
+<button  type="submit" class="btn btn-primary" name="delete" value="Submit" id="submit_form">DELETE</button>
+</div>
+</form>
+</div>
+<div col-lg-8></div>
+<div col-lg-1 align="right"><button onclick="location.href = 'home.php';"  class="btn btn-primary">Home</button></div>
+
+</div>
+
   <div class="container">
-    <br/><br/><br/>
+<h3 style="text-align: center;">Records</h3>
+   
 
 <?php
 session_start();
 require_once("config.php");
 $user=$_SESSION["USER"];
+
 
    $sql = "SELECT * FROM admintable WHERE fromw='$user'";
    $result1 = $conn->query($sql);
@@ -23,21 +45,23 @@ $user=$_SESSION["USER"];
     if ($result1->num_rows > 0) 
   {
     echo "<table class='table table-hover'>";
+    echo "<th>UNIQUE ID</th>";
     echo "<th>NAME</th>";
     echo "<th>Roll Number</th>";
     echo "<th>For What</th>";
     echo "<th>rupees</th>";
     echo "<th>Contact</th>";
-    echo "<th>Delete</th>";
+    
     while($row = $result1->fetch_assoc()) 
       {
         echo "<tr>
+          <td>". $row["id"]. " </td>
           <td>". $row["name"]. " </td>
           <td>". $row["rollno"]. " </td>
           <td>". $row["forw"]. " </td>
           <td>". $row["rupees"]. " </td>
           <td>". $row["contact"]. " </td>
-          <td>".'<a onclick="delete($id)">delete</a>'." </td>
+          
          </tr>";
          
         }
@@ -50,8 +74,27 @@ $user=$_SESSION["USER"];
 } 
 
 ?>
-
-
 </div>
+
+
+
+<?php
+
+require_once("config.php");
+if(isset($_POST["delete"])){
+$uniqueid=$_POST["id"];
+
+if ($result1->num_rows > 0) {
+    
+    $sql = "DELETE FROM admintable WHERE id='$uniqueid' ";
+    $result1 = $conn->query($sql); 
+    header("Refresh:0");
+}
+ else 
+{
+    $result1="please check id";
+}
+}
+?>
 </body>
 </html>
