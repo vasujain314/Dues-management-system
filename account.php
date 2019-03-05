@@ -28,6 +28,7 @@ $user=$_SESSION["USER"];
     echo "<th>For What</th>";
     echo "<th>rupees</th>";
     echo "<th>Contact</th>";
+    echo "<th>Delete</th>";
     while($row = $result1->fetch_assoc()) 
       {
         echo "<tr>
@@ -36,7 +37,9 @@ $user=$_SESSION["USER"];
           <td>". $row["forw"]. " </td>
           <td>". $row["rupees"]. " </td>
           <td>". $row["contact"]. " </td>
+          <td>".'<a onclick="delete($id)">delete</a>'." </td>
          </tr>";
+         
         }
     echo "</table>";
     }
@@ -47,6 +50,8 @@ $user=$_SESSION["USER"];
 } 
 
 ?>
+
+
 </div>
 </body>
 </html>
