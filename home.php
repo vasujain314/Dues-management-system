@@ -37,7 +37,30 @@ else{
 
 <body>
 <br>
+<?php
+require_once("config.php");
+if(isset($_POST['uploadBtn'])){
+	$filename=$_FILES['myFile']['name'];
+	$fileTmpName=$_FILES['myFile']['tmp_name'];
+	$handle= fopen($fileTmpName , 'r');
+	$fileExtension= pathinfo($filename,PATHINFO_EXTENSION);
+	
 
+	while(($myData =fgetcsv($handle,1000,","))!==FALSE){
+           $fromw=$myData[0];
+           $name= $myData[1];
+           $roll= $myData[2];
+           $for= $myData[3];
+           $rupees= $myData[4];
+           $contact= $myData[5];
+
+           $sql= "insert into admintable (fromw,name,rollno,forw,rupees,contact)
+           values('".$fromw."','".$name."','".$roll."','".$for."','".$rupees."','".$contact."') ";
+           $result = $conn->query($sql);
+	}
+}
+
+?>
 <div class="container" >
 <div class="row">
 <div class="col-lg-6" align="left";>
@@ -57,7 +80,7 @@ else{
 <div class="col-lg-4">
 
 
-<img class="logoimg" src="images/logo.jpg" align="right">
+<img class="logoimg" style="width: 100px; height: 100px;" src="images/logo.jpg" align="right">
 </div>
 <div class="col-lg-8">
 <br>
@@ -101,7 +124,16 @@ else{
 <button type="submit" class="btn btn-primary" name="submit" value="Submit" id="submit_form">Submit</button>
 </form>
 </div>
-<div class="col-sm-6"></div>
+<div class="col-sm-6">
+	<form action="" method="post" enctype="multipart/form-data">
+		<div class="form-group">
+			<input type="file" name="myFile"  class="form-control">
+		</div>
+		<div class="form-group">
+			<input type="submit" name="uploadBtn">
+		</div>
+	</form>
+</div>
 </div>
 </div>
 

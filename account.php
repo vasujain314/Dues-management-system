@@ -24,8 +24,24 @@
 </div>
 </form>
 </div>
-<div col-lg-8></div>
-<div col-lg-1 align="right"><button onclick="location.href = 'home.php';"  class="btn btn-primary">Home</button></div>
+<div class="col-lg-3">
+  <form name="contact-form" action="" method="post" id="contact-form">
+<div class="form-group">
+<label for="id">ENTER ID TO update</label>
+
+<input type="text" class="form-control" name="id" placeholder="id" required>
+<br/>
+<label for="id">ENTER final value</label>
+
+<input type="text" class="form-control" name="finalvalue" placeholder="finalvalue" required>
+<br/>
+<button  type="submit" class="btn btn-primary" name="update" value="Submit" id="submit_form">UPDATE</button>
+</div>
+</form>
+
+</div>
+<div class="col-lg-5"></div>
+<div class="col-lg-1"  align="right"><button onclick="location.href = 'home.php';"  class="btn btn-primary">Home</button></div>
 
 </div>
 
@@ -94,6 +110,27 @@ if ($result1->num_rows > 0) {
 {
     $result1="please check id";
 }
+}
+?>
+<?php
+require_once("config.php");
+if(isset($_POST["update"])){
+  $uniqueid=$_POST["id"];
+  $finalvalue=$_POST["finalvalue"];
+if ($result1->num_rows > 0) {
+    
+    $sql = "UPDATE admintable
+            SET rupees = '$finalvalue'
+            WHERE id = '$uniqueid'; ";
+
+    $result1 = $conn->query($sql); 
+    header("Refresh:0");
+}
+ else 
+{
+    $result1="please check id";
+}
+
 }
 ?>
 </body>

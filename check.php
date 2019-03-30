@@ -23,6 +23,8 @@ $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     echo "<table class='table table-hover'>";
+    echo "<th>id</th>";
+    echo "<th>fromwho</th>";
     echo "<th>NAME</th>";
     echo "<th>Roll Number</th>";
     echo "<th>For What</th>";
@@ -30,6 +32,8 @@ if ($result->num_rows > 0) {
     echo "<th>Contact</th>";
     while($row = $result->fetch_assoc()) {
               echo "<tr>
+              <td>". $row["id"]. " </td>
+              <td>". $row["fromw"]. " </td>
           <td>". $row["name"]. " </td>
           <td>". $row["rollno"]. " </td>
           <td>". $row["forw"]. " </td>
