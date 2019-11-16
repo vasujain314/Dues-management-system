@@ -18,27 +18,21 @@ if(isset($_POST['submit'])){
 
 
 $rollnor=$_POST['rollno'];
-$sql = "SELECT * FROM admintable WHERE rollno='$rollnor'";
+$sql = "SELECT r.fromw,r.forw,r.rupees FROM recordsh as r WHERE r.rollno='$rollnor'";
 $result = $conn->query($sql);
-
+$id=1;
 if ($result->num_rows > 0) {
     echo "<table class='table table-hover'>";
     echo "<th>id</th>";
     echo "<th>fromwho</th>";
-    echo "<th>NAME</th>";
-    echo "<th>Roll Number</th>";
     echo "<th>For What</th>";
     echo "<th>rupees</th>";
-    echo "<th>Contact</th>";
     while($row = $result->fetch_assoc()) {
               echo "<tr>
-              <td>". $row["id"]. " </td>
+              <td>". $id++ . " </td>
               <td>". $row["fromw"]. " </td>
-          <td>". $row["name"]. " </td>
-          <td>". $row["rollno"]. " </td>
           <td>". $row["forw"]. " </td>
           <td>". $row["rupees"]. " </td>
-          <td>". $row["contact"]. " </td>
          </tr>";
         }
     echo "</table>";

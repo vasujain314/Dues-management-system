@@ -9,12 +9,11 @@ $pass=$_POST['password'];
 
 
 
-$sql = "SELECT * FROM users WHERE user='$user' AND pass='$pass' ";
+$sql = "SELECT * FROM admin WHERE username='$user' AND password='$pass' ";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
-    
     $_SESSION["USER"] = $user;
-        header("location: home.php");
+    header("location: home.php");
     
 }
  else 
@@ -51,12 +50,12 @@ if ($result->num_rows > 0) {
 <div class="row">
 <div class="col-lg-4">
 
-<img class="logoimg" src="images/logo.jpg" align="right">
+<img class="logoimg" src="images/logo.gif" align="right">
 
 </div>
 <div class="col-lg-8">
 <br>
-<h2 style="color:white;">National Institute Of Technology , Hamirpur.</h2>
+<h2 style="color:white;">Indian Institute Of Information Technology, Una.</h2>
 <h3 style="color:white;">Dues Management System.</h3>
 </div>
 </div>

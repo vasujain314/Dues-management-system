@@ -12,19 +12,9 @@
 
   <br/><br/>
 <div class="container">
-  <div class="col-lg-3">
-    
-    <form name="contact-form" action="" method="post" id="contact-form">
-<div class="form-group">
-<label for="id">ENTER ID TO DELETE</label>
-
-<input type="text" class="form-control" name="id" placeholder="id" required>
-<br/>
-<button  type="submit" class="btn btn-primary" name="delete" value="Submit" id="submit_form">DELETE</button>
-</div>
-</form>
-</div>
-<div class="col-lg-3">
+<div class="col-lg-1"  align="right"><button onclick="location.href = 'home.php';"  class="btn btn-primary">Home</button></div>
+ <div class="col-lg-11">
+ <!--
   <form name="contact-form" action="" method="post" id="contact-form">
 <div class="form-group">
 <label for="id">ENTER ID TO update</label>
@@ -38,11 +28,8 @@
 <button  type="submit" class="btn btn-primary" name="update" value="Submit" id="submit_form">UPDATE</button>
 </div>
 </form>
-
+-->
 </div>
-<div class="col-lg-5"></div>
-<div class="col-lg-1"  align="right"><button onclick="location.href = 'home.php';"  class="btn btn-primary">Home</button></div>
-
 </div>
 
   <div class="container">
@@ -55,7 +42,7 @@ require_once("config.php");
 $user=$_SESSION["USER"];
 
 
-   $sql = "SELECT * FROM admintable WHERE fromw='$user'";
+   $sql = "SELECT r.id,s.sname,s.semester,s.contact,r.forw,r.rupees,r.rollno FROM recordsh as r,students as s WHERE r.rollno=s.rollno AND r.fromw='$user'";
    $result1 = $conn->query($sql);
 
     if ($result1->num_rows > 0) 
@@ -64,22 +51,27 @@ $user=$_SESSION["USER"];
     echo "<th>UNIQUE ID</th>";
     echo "<th>NAME</th>";
     echo "<th>Roll Number</th>";
+	echo "<th>Semester</th>";
     echo "<th>For What</th>";
     echo "<th>rupees</th>";
     echo "<th>Contact</th>";
+	echo "<th>Delete</th>";
+	echo "<th>Update</th>";
     
     while($row = $result1->fetch_assoc()) 
       {
-        echo "<tr>
-          <td>". $row["id"]. " </td>
-          <td>". $row["name"]. " </td>
-          <td>". $row["rollno"]. " </td>
-          <td>". $row["forw"]. " </td>
-          <td>". $row["rupees"]. " </td>
-          <td>". $row["contact"]. " </td>
-          
-         </tr>";
-         
+       
+		 echo "<tr>";
+echo "<td>".$row['id']."</td>";
+echo "<td>".$row['sname']."</td>";
+echo "<td>".$row['rollno']."</td>";
+echo "<td>".$row['semester']."</td>";
+echo "<td>".$row['forw']."</td>";
+echo "<td>".$row['rupees']."</td>";
+echo "<td>".$row['contact']."</td>";
+ echo "<td><a href='delete.php?id=".$row['id']."'>delete</a></td>";
+ echo "<td><a href='update.php?id=".$row['id']."'>update</a></td>";
+echo "</tr>";
         }
     echo "</table>";
     }
@@ -92,34 +84,14 @@ $user=$_SESSION["USER"];
 ?>
 </div>
 
-
-
-<?php
-
-require_once("config.php");
-if(isset($_POST["delete"])){
-$uniqueid=$_POST["id"];
-
-if ($result1->num_rows > 0) {
-    
-    $sql = "DELETE FROM admintable WHERE id='$uniqueid' ";
-    $result1 = $conn->query($sql); 
-    header("Refresh:0");
-}
- else 
-{
-    $result1="please check id";
-}
-}
-?>
-<?php
+<!-- 
 require_once("config.php");
 if(isset($_POST["update"])){
   $uniqueid=$_POST["id"];
   $finalvalue=$_POST["finalvalue"];
 if ($result1->num_rows > 0) {
     
-    $sql = "UPDATE admintable
+    $sql = "UPDATE recordsh
             SET rupees = '$finalvalue'
             WHERE id = '$uniqueid'; ";
 
@@ -132,6 +104,6 @@ if ($result1->num_rows > 0) {
 }
 
 }
-?>
+ -->
 </body>
 </html>
