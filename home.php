@@ -79,11 +79,11 @@ if(isset($_POST['uploadBtn'])){
 <div class="col-lg-4">
 
 
-<img class="logoimg" style="width: 100px; height: 100px;" src="images/logo.jpg" align="right">
+<img class="logoimg" style="width: 100px; height: 100px;" src="images/logo.gif" align="right">
 </div>
 <div class="col-lg-8">
 <br>
-<h2 >National institute of technology, hamirpur.</h2>
+<h2 >Indian Institute of Information Technology, Una</h2>
 <h3 >Dues Management System.</h3>
 </div>
 </div>

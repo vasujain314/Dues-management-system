@@ -4,10 +4,9 @@ $result="";
 require_once("config.php");
 
 if(isset($_POST['login'])){
+	
 $user=$_POST['username'];
 $pass=$_POST['password'];
-
-
 
 $sql = "SELECT * FROM admin WHERE username='$user' AND password='$pass' ";
 $result = $conn->query($sql);
