@@ -15,6 +15,7 @@
 <div class="col-lg-1"  align="right"><button onclick="location.href = 'home.php';"  class="btn btn-primary">Home</button></div>
  <div class="col-lg-11">
  <!--
+The following code can be added if required.
   <form name="contact-form" action="" method="post" id="contact-form">
 <div class="form-group">
 <label for="id">ENTER ID TO update</label>
